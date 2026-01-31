@@ -59,10 +59,17 @@ class Civ6TimelineViewer {
         reader.onload = (e) => {
             try {
                 this.data = JSON.parse(e.target.result);
+            } catch (err) {
+                alert('Error parsing JSON file. The file may be corrupted or not valid JSON.');
+                console.error('JSON parse error:', err);
+                return;
+            }
+
+            try {
                 this.processData();
             } catch (err) {
-                alert('Error parsing JSON file. Please make sure it\'s a valid Civ6 timeline file.');
-                console.error(err);
+                alert('Error processing timeline data: ' + err.message);
+                console.error('Processing error:', err);
             }
         };
         reader.readAsText(file);
@@ -137,11 +144,11 @@ class Civ6TimelineViewer {
             card.className = 'player-card';
 
             // Check if human player (usually the first one or check LeaderType)
-            const isHuman = player.LeaderType && !player.LeaderType.includes('MINOR');
             if (player.Id === 0) card.classList.add('human');
 
-            const leaderName = this.formatLeaderName(player.LeaderName || player.LeaderType);
-            const civName = this.formatCivName(player.Civilization);
+            const leaderName = this.formatPlayerName(player);
+            // Use CivilizationShortDescription if available (newer format), otherwise format the raw name
+            const civName = player.CivilizationShortDescription || this.formatCivName(player.Civilization);
             const playerType = this.getPlayerType(player);
 
             card.innerHTML = `
@@ -237,6 +244,11 @@ class Civ6TimelineViewer {
 
     // Formatting helpers
     formatPlayerName(player) {
+        // Newer format has human-readable LeaderName directly
+        if (player.LeaderName && !player.LeaderName.startsWith('LOC_')) {
+            return player.LeaderName;
+        }
+        // Fall back to formatting the raw name
         if (player.LeaderName) {
             return this.formatLeaderName(player.LeaderName);
         }
@@ -248,6 +260,10 @@ class Civ6TimelineViewer {
 
     formatLeaderName(name) {
         if (!name) return 'Unknown';
+        // If it doesn't look like a constant, return as-is
+        if (!name.includes('_') && !name.startsWith('LOC_') && !name.startsWith('LEADER_')) {
+            return name;
+        }
         // Handle LOC_LEADER_NAME format
         return name
             .replace(/^LOC_/, '')
@@ -261,6 +277,10 @@ class Civ6TimelineViewer {
 
     formatCivName(civ) {
         if (!civ) return 'Unknown Civilization';
+        // If it doesn't look like a constant, return as-is
+        if (!civ.startsWith('CIVILIZATION_')) {
+            return civ;
+        }
         return civ
             .replace(/^CIVILIZATION_/, '')
             .replace(/_/g, ' ')
@@ -298,7 +318,11 @@ class Civ6TimelineViewer {
 
     getPlayerType(player) {
         if (!player.LeaderType) return 'Unknown';
+        // Check for city-states via LeaderType or CivilizationDescription
         if (player.LeaderType.includes('MINOR') || player.LeaderType.includes('CITY_STATE')) {
+            return 'City-State';
+        }
+        if (player.CivilizationDescription && player.CivilizationDescription.includes('city-state')) {
             return 'City-State';
         }
         if (player.Id === 0) return 'Human';
@@ -310,18 +334,31 @@ class Civ6TimelineViewer {
             return '';
         }
 
-        return extraData
-            .filter(item => item.Value && item.Value.trim())
+        // In newer Civ6 versions (Gathering Storm), ExtraData has numeric Type and Value
+        // In older versions, Type was a string like "MOMENT_DATA_CITY" and Value was a string
+        const formatted = extraData
+            .filter(item => item.Value !== undefined && item.Value !== null)
             .map(item => {
                 const type = this.formatExtraDataType(item.Type);
-                return `<strong>${type}:</strong> ${item.Value}`;
+                const value = String(item.Value).trim();
+                if (!value) return null;
+                return `<strong>${type}:</strong> ${value}`;
             })
-            .join(' | ');
+            .filter(Boolean);
+
+        return formatted.join(' | ');
     }
 
     formatExtraDataType(type) {
-        if (!type) return 'Info';
-        return type
+        if (type === undefined || type === null) return 'Info';
+
+        // Handle numeric type hashes (Gathering Storm format)
+        if (typeof type === 'number') {
+            return 'Data';
+        }
+
+        // Handle string types (older format)
+        return String(type)
             .replace(/^MOMENT_DATA_/, '')
             .replace(/_/g, ' ')
             .toLowerCase()
