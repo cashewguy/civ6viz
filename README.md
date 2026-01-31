@@ -1,0 +1,67 @@
+# Civilization 6 Timeline Viewer
+
+A web-based viewer for Civilization 6 timeline JSON files. Visualize your game history with an interactive timeline showing all moments, achievements, and events from your playthrough.
+
+## Features
+
+- **File Upload**: Drag-and-drop or browse to upload timeline JSON files
+- **Player Overview**: View all civilizations and leaders in the game
+- **Interactive Timeline**: Moments grouped by turn with era indicators
+- **Filtering**: Filter by player, era, or moment type
+- **Icon Support**: Civ6 icon tags converted to emoji for readability
+- **Responsive Design**: Works on desktop and mobile
+
+## Quick Start
+
+### 1. Download the Project
+
+```bash
+git clone https://github.com/cashewguy/civ6viz.git
+cd civ6viz
+```
+
+Or download and extract the ZIP file from GitHub.
+
+### 2. Start a Local Server
+
+The viewer needs to run from a web server (not directly from the filesystem). Use Python's built-in server:
+
+```bash
+# Python 3
+python -m http.server 8000
+
+# Or Python 2
+python -m SimpleHTTPServer 8000
+```
+
+### 3. Open in Browser
+
+Navigate to: **http://localhost:8000**
+
+### 4. Upload Your Timeline
+
+1. Click the upload area or drag-and-drop your timeline JSON file
+2. Use the filters to explore specific players, eras, or event types
+3. Scroll through your game history
+
+## Finding Your Timeline Files
+
+Civilization 6 generates timeline files at the end of each game. They're located at:
+
+| Platform | Path |
+|----------|------|
+| **Windows** | `Documents\My Games\Sid Meier's Civilization VI\Saves\Timeline\` |
+| **macOS** | `~/Library/Application Support/Sid Meier's Civilization VI/Saves/Timeline/` |
+| **Linux** | `~/.local/share/aspyr-media/Sid Meier's Civilization VI/Saves/Timeline/` |
+
+Files are named with the format: `YYYY-MM-DD-HHMM-LeaderName-Timeline.json`
+
+## Compatibility
+
+- **Base Game**: Supported
+- **Rise & Fall**: Supported
+- **Gathering Storm**: Supported (including newer JSON format)
+
+## License
+
+MIT
