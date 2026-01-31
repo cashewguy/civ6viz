@@ -1,0 +1,417 @@
+/* Civilization 6 Timeline Viewer Styles */
+
+:root {
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;
+    --bg-card: #0f3460;
+    --accent: #e94560;
+    --accent-light: #ff6b6b;
+    --text-primary: #eaeaea;
+    --text-secondary: #b8b8b8;
+    --gold: #ffd700;
+    --era-ancient: #8b4513;
+    --era-classical: #4a90d9;
+    --era-medieval: #6b8e23;
+    --era-renaissance: #9932cc;
+    --era-industrial: #708090;
+    --era-modern: #2e8b57;
+    --era-atomic: #ff4500;
+    --era-information: #00ced1;
+    --era-future: #9400d3;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--accent);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(90deg, var(--gold), var(--accent-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* Upload Section */
+.upload-section {
+    margin-bottom: 2rem;
+}
+
+.upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    border: 3px dashed var(--accent);
+    border-radius: 12px;
+    background: rgba(233, 69, 96, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-label:hover {
+    background: rgba(233, 69, 96, 0.2);
+    border-color: var(--accent-light);
+    transform: translateY(-2px);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.upload-text {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.upload-hint {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+#file-input {
+    display: none;
+}
+
+/* Game Info */
+.game-info {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.game-info h2 {
+    color: var(--gold);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.player-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent);
+    transition: transform 0.2s ease;
+}
+
+.player-card:hover {
+    transform: translateX(5px);
+}
+
+.player-card.human {
+    border-left-color: var(--gold);
+}
+
+.player-card .player-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.player-card .player-civ {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.player-card .player-type {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    margin-top: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    background: rgba(255, 215, 0, 0.2);
+    color: var(--gold);
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: var(--bg-card);
+    border-radius: 12px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-group label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.filter-group select {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.filter-group select:focus {
+    outline: none;
+    border-color: var(--accent-light);
+}
+
+.stats {
+    margin-left: auto;
+    display: flex;
+    gap: 1rem;
+}
+
+.stats span {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 6px;
+    color: var(--gold);
+    font-size: 0.9rem;
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--accent), var(--gold));
+    border-radius: 2px;
+}
+
+.turn-group {
+    margin-bottom: 1.5rem;
+    padding-left: 50px;
+    position: relative;
+}
+
+.turn-marker {
+    position: absolute;
+    left: 8px;
+    top: 0;
+    width: 28px;
+    height: 28px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0 2px 10px rgba(233, 69, 96, 0.5);
+}
+
+.turn-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.turn-number {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--gold);
+}
+
+.turn-era {
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.era-ancient { background: var(--era-ancient); }
+.era-classical { background: var(--era-classical); }
+.era-medieval { background: var(--era-medieval); }
+.era-renaissance { background: var(--era-renaissance); }
+.era-industrial { background: var(--era-industrial); }
+.era-modern { background: var(--era-modern); }
+.era-atomic { background: var(--era-atomic); }
+.era-information { background: var(--era-information); }
+.era-future { background: var(--era-future); }
+
+.moments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.moment-card {
+    background: var(--bg-card);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--accent);
+    transition: all 0.2s ease;
+}
+
+.moment-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.moment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.moment-type {
+    font-size: 0.75rem;
+    color: var(--accent-light);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.moment-score {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.85rem;
+    color: var(--gold);
+}
+
+.moment-description {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.moment-player {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.moment-extra {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* Hidden class */
+.hidden {
+    display: none !important;
+}
+
+/* Footer */
+footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .stats {
+        margin-left: 0;
+        justify-content: center;
+    }
+
+    .timeline::before {
+        left: 10px;
+    }
+
+    .turn-group {
+        padding-left: 35px;
+    }
+
+    .turn-marker {
+        left: 0;
+        width: 24px;
+        height: 24px;
+        font-size: 0.6rem;
+    }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-light);
+}

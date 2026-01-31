@@ -1,0 +1,337 @@
+{
+  "Players": [
+    {
+      "Id": 0,
+      "Civilization": "CIVILIZATION_ROME",
+      "CivilizationDescription": "LOC_CIVILIZATION_ROME_DESCRIPTION",
+      "CivilizationShortDescription": "LOC_CIVILIZATION_ROME_SHORT_DESCRIPTION",
+      "CivilizationAdjective": "LOC_CIVILIZATION_ROME_ADJECTIVE",
+      "LeaderType": "LEADER_TRAJAN",
+      "LeaderName": "LOC_LEADER_TRAJAN_NAME"
+    },
+    {
+      "Id": 1,
+      "Civilization": "CIVILIZATION_GREECE",
+      "CivilizationDescription": "LOC_CIVILIZATION_GREECE_DESCRIPTION",
+      "CivilizationShortDescription": "LOC_CIVILIZATION_GREECE_SHORT_DESCRIPTION",
+      "CivilizationAdjective": "LOC_CIVILIZATION_GREECE_ADJECTIVE",
+      "LeaderType": "LEADER_PERICLES",
+      "LeaderName": "LOC_LEADER_PERICLES_NAME"
+    },
+    {
+      "Id": 2,
+      "Civilization": "CIVILIZATION_EGYPT",
+      "CivilizationDescription": "LOC_CIVILIZATION_EGYPT_DESCRIPTION",
+      "CivilizationShortDescription": "LOC_CIVILIZATION_EGYPT_SHORT_DESCRIPTION",
+      "CivilizationAdjective": "LOC_CIVILIZATION_EGYPT_ADJECTIVE",
+      "LeaderType": "LEADER_CLEOPATRA",
+      "LeaderName": "LOC_LEADER_CLEOPATRA_NAME"
+    },
+    {
+      "Id": 3,
+      "Civilization": "CIVILIZATION_CHINA",
+      "CivilizationDescription": "LOC_CIVILIZATION_CHINA_DESCRIPTION",
+      "CivilizationShortDescription": "LOC_CIVILIZATION_CHINA_SHORT_DESCRIPTION",
+      "CivilizationAdjective": "LOC_CIVILIZATION_CHINA_ADJECTIVE",
+      "LeaderType": "LEADER_QIN",
+      "LeaderName": "LOC_LEADER_QIN_NAME"
+    }
+  ],
+  "Moments": [
+    {
+      "Id": 1,
+      "Type": "MOMENT_CITY_FOUNDED",
+      "Turn": 1,
+      "GameEra": "ERA_ANCIENT",
+      "EraScore": 1,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": false,
+      "InstanceDescription": "Rome has been founded, marking the beginning of a glorious civilization.",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_CITY", "Value": "Rome"}
+      ]
+    },
+    {
+      "Id": 2,
+      "Type": "MOMENT_CITY_FOUNDED",
+      "Turn": 1,
+      "GameEra": "ERA_ANCIENT",
+      "EraScore": 1,
+      "ActingPlayer": 1,
+      "HasEverBeenCommemorated": false,
+      "InstanceDescription": "Athens has been founded by the Greeks.",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_CITY", "Value": "Athens"}
+      ]
+    },
+    {
+      "Id": 3,
+      "Type": "MOMENT_PLAYER_MET_MAJOR",
+      "Turn": 15,
+      "GameEra": "ERA_ANCIENT",
+      "EraScore": 2,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": false,
+      "InstanceDescription": "Roman scouts have made first contact with the Greek civilization.",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_CIVILIZATION", "Value": "Greece"}
+      ]
+    },
+    {
+      "Id": 4,
+      "Type": "MOMENT_PANTHEON_FOUNDED",
+      "Turn": 22,
+      "GameEra": "ERA_ANCIENT",
+      "EraScore": 1,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": false,
+      "InstanceDescription": "Rome has founded a Pantheon, choosing God of the Forge.",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_BELIEF", "Value": "God of the Forge"}
+      ]
+    },
+    {
+      "Id": 5,
+      "Type": "MOMENT_FIND_NATURAL_WONDER",
+      "Turn": 28,
+      "GameEra": "ERA_ANCIENT",
+      "EraScore": 3,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": true,
+      "InstanceDescription": "Roman explorers have discovered the Great Barrier Reef!",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_FEATURE", "Value": "Great Barrier Reef"}
+      ]
+    },
+    {
+      "Id": 6,
+      "Type": "MOMENT_WONDER_CONSTRUCTED",
+      "Turn": 45,
+      "GameEra": "ERA_ANCIENT",
+      "EraScore": 4,
+      "ActingPlayer": 2,
+      "HasEverBeenCommemorated": true,
+      "InstanceDescription": "Egypt has completed construction of the Pyramids!",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_WONDER", "Value": "Pyramids"}
+      ]
+    },
+    {
+      "Id": 7,
+      "Type": "MOMENT_BATTLE_FOUGHT",
+      "Turn": 52,
+      "GameEra": "ERA_ANCIENT",
+      "EraScore": 1,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": false,
+      "InstanceDescription": "A battle was fought between Roman and Barbarian forces.",
+      "ExtraData": []
+    },
+    {
+      "Id": 8,
+      "Type": "MOMENT_GREAT_PERSON_RECRUITED",
+      "Turn": 60,
+      "GameEra": "ERA_CLASSICAL",
+      "EraScore": 2,
+      "ActingPlayer": 1,
+      "HasEverBeenCommemorated": false,
+      "InstanceDescription": "Greece has recruited the Great Scientist Euclid.",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_GREAT_PERSON", "Value": "Euclid"}
+      ]
+    },
+    {
+      "Id": 9,
+      "Type": "MOMENT_CITY_FOUNDED",
+      "Turn": 65,
+      "GameEra": "ERA_CLASSICAL",
+      "EraScore": 1,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": false,
+      "InstanceDescription": "Mediolanum has been founded, expanding the Roman Empire.",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_CITY", "Value": "Mediolanum"}
+      ]
+    },
+    {
+      "Id": 10,
+      "Type": "MOMENT_WONDER_CONSTRUCTED",
+      "Turn": 78,
+      "GameEra": "ERA_CLASSICAL",
+      "EraScore": 4,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": true,
+      "InstanceDescription": "Rome has completed construction of the Colosseum!",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_WONDER", "Value": "Colosseum"}
+      ]
+    },
+    {
+      "Id": 11,
+      "Type": "MOMENT_RELIGION_FOUNDED",
+      "Turn": 85,
+      "GameEra": "ERA_CLASSICAL",
+      "EraScore": 3,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": true,
+      "InstanceDescription": "Rome has founded a new religion: Christianity.",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_RELIGION", "Value": "Christianity"}
+      ]
+    },
+    {
+      "Id": 12,
+      "Type": "MOMENT_PLAYER_MET_MAJOR",
+      "Turn": 92,
+      "GameEra": "ERA_CLASSICAL",
+      "EraScore": 2,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": false,
+      "InstanceDescription": "Roman diplomats have established contact with China.",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_CIVILIZATION", "Value": "China"}
+      ]
+    },
+    {
+      "Id": 13,
+      "Type": "MOMENT_WONDER_CONSTRUCTED",
+      "Turn": 110,
+      "GameEra": "ERA_MEDIEVAL",
+      "EraScore": 4,
+      "ActingPlayer": 3,
+      "HasEverBeenCommemorated": true,
+      "InstanceDescription": "China has completed construction of the Great Wall!",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_WONDER", "Value": "Great Wall"}
+      ]
+    },
+    {
+      "Id": 14,
+      "Type": "MOMENT_GREAT_PERSON_RECRUITED",
+      "Turn": 125,
+      "GameEra": "ERA_MEDIEVAL",
+      "EraScore": 2,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": false,
+      "InstanceDescription": "Rome has recruited the Great General Sun Tzu.",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_GREAT_PERSON", "Value": "Sun Tzu"}
+      ]
+    },
+    {
+      "Id": 15,
+      "Type": "MOMENT_CITY_CAPTURED",
+      "Turn": 140,
+      "GameEra": "ERA_MEDIEVAL",
+      "EraScore": 3,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": false,
+      "InstanceDescription": "Roman legions have captured the city of Sparta!",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_CITY", "Value": "Sparta"}
+      ]
+    },
+    {
+      "Id": 16,
+      "Type": "MOMENT_WONDER_CONSTRUCTED",
+      "Turn": 165,
+      "GameEra": "ERA_RENAISSANCE",
+      "EraScore": 4,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": true,
+      "InstanceDescription": "Rome has completed construction of the Sistine Chapel!",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_WONDER", "Value": "Sistine Chapel"}
+      ]
+    },
+    {
+      "Id": 17,
+      "Type": "MOMENT_GREAT_PERSON_RECRUITED",
+      "Turn": 180,
+      "GameEra": "ERA_RENAISSANCE",
+      "EraScore": 2,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": false,
+      "InstanceDescription": "Rome has recruited the Great Artist Leonardo da Vinci.",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_GREAT_PERSON", "Value": "Leonardo da Vinci"}
+      ]
+    },
+    {
+      "Id": 18,
+      "Type": "MOMENT_CIVIC_COMPLETED",
+      "Turn": 195,
+      "GameEra": "ERA_INDUSTRIAL",
+      "EraScore": 1,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": false,
+      "InstanceDescription": "Rome has adopted Colonialism.",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_CIVIC", "Value": "Colonialism"}
+      ]
+    },
+    {
+      "Id": 19,
+      "Type": "MOMENT_WONDER_CONSTRUCTED",
+      "Turn": 220,
+      "GameEra": "ERA_INDUSTRIAL",
+      "EraScore": 4,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": true,
+      "InstanceDescription": "Rome has completed construction of the Eiffel Tower!",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_WONDER", "Value": "Eiffel Tower"}
+      ]
+    },
+    {
+      "Id": 20,
+      "Type": "MOMENT_GREAT_PERSON_RECRUITED",
+      "Turn": 245,
+      "GameEra": "ERA_MODERN",
+      "EraScore": 2,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": false,
+      "InstanceDescription": "Rome has recruited the Great Scientist Albert Einstein.",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_GREAT_PERSON", "Value": "Albert Einstein"}
+      ]
+    },
+    {
+      "Id": 21,
+      "Type": "MOMENT_FIRST_TO_TRIGGER_BOOST",
+      "Turn": 260,
+      "GameEra": "ERA_ATOMIC",
+      "EraScore": 1,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": false,
+      "InstanceDescription": "Rome was the first civilization to boost Nuclear Fission.",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_TECH", "Value": "Nuclear Fission"}
+      ]
+    },
+    {
+      "Id": 22,
+      "Type": "MOMENT_WONDER_CONSTRUCTED",
+      "Turn": 280,
+      "GameEra": "ERA_INFORMATION",
+      "EraScore": 4,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": true,
+      "InstanceDescription": "Rome has completed construction of the Sydney Opera House!",
+      "ExtraData": [
+        {"Type": "MOMENT_DATA_WONDER", "Value": "Sydney Opera House"}
+      ]
+    },
+    {
+      "Id": 23,
+      "Type": "MOMENT_SCIENCE_VICTORY",
+      "Turn": 320,
+      "GameEra": "ERA_INFORMATION",
+      "EraScore": 5,
+      "ActingPlayer": 0,
+      "HasEverBeenCommemorated": true,
+      "InstanceDescription": "Rome has achieved a Science Victory by launching the Mars Colony!",
+      "ExtraData": []
+    }
+  ]
+}
