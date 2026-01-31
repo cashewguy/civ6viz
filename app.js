@@ -222,6 +222,7 @@ class Civ6TimelineViewer {
         const playerName = player ? this.formatPlayerName(player) : `Player ${moment.ActingPlayer}`;
 
         const extraData = this.formatExtraData(moment.ExtraData);
+        const description = this.formatIconTags(moment.InstanceDescription || 'No description available');
 
         return `
             <div class="moment-card">
@@ -229,7 +230,7 @@ class Civ6TimelineViewer {
                     <span class="moment-type">${this.formatMomentType(moment.Type)}</span>
                     ${moment.EraScore ? `<span class="moment-score">+${moment.EraScore} Era Score</span>` : ''}
                 </div>
-                <div class="moment-description">${moment.InstanceDescription || 'No description available'}</div>
+                <div class="moment-description">${description}</div>
                 <div class="moment-player">By: ${playerName}</div>
                 ${extraData ? `<div class="moment-extra">${extraData}</div>` : ''}
             </div>
@@ -366,9 +367,109 @@ class Civ6TimelineViewer {
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ');
     }
+
+    // Convert Civ6 icon tags like [ICON_RESOURCE_ANTIQUITY_SITE] to readable text or emoji
+    formatIconTags(text) {
+        if (!text) return text;
+
+        // Map of icon tags to emoji/text replacements
+        const iconMap = {
+            // Resources
+            'ICON_RESOURCE_ANTIQUITY_SITE': '<span class="civ-icon" title="Antiquity Site">🏺</span>',
+            'ICON_RESOURCE_SHIPWRECK': '<span class="civ-icon" title="Shipwreck">🚢</span>',
+            'ICON_RESOURCE_GOLD': '<span class="civ-icon" title="Gold">🪙</span>',
+            'ICON_RESOURCE_FOOD': '<span class="civ-icon" title="Food">🌾</span>',
+            'ICON_RESOURCE_PRODUCTION': '<span class="civ-icon" title="Production">⚙️</span>',
+            'ICON_RESOURCE_SCIENCE': '<span class="civ-icon" title="Science">🔬</span>',
+            'ICON_RESOURCE_CULTURE': '<span class="civ-icon" title="Culture">🎭</span>',
+            'ICON_RESOURCE_FAITH': '<span class="civ-icon" title="Faith">🕊️</span>',
+            'ICON_RESOURCE_HORSES': '<span class="civ-icon" title="Horses">🐴</span>',
+            'ICON_RESOURCE_IRON': '<span class="civ-icon" title="Iron">⛏️</span>',
+            'ICON_RESOURCE_NITER': '<span class="civ-icon" title="Niter">�ite</span>',
+            'ICON_RESOURCE_COAL': '<span class="civ-icon" title="Coal">ite</span>',
+            'ICON_RESOURCE_OIL': '<span class="civ-icon" title="Oil">🛢️</span>',
+            'ICON_RESOURCE_ALUMINUM': '<span class="civ-icon" title="Aluminum">🔩</span>',
+            'ICON_RESOURCE_URANIUM': '<span class="civ-icon" title="Uranium">☢️</span>',
+            // Yields
+            'ICON_GOLD': '<span class="civ-icon" title="Gold">🪙</span>',
+            'ICON_FOOD': '<span class="civ-icon" title="Food">🌾</span>',
+            'ICON_PRODUCTION': '<span class="civ-icon" title="Production">⚙️</span>',
+            'ICON_SCIENCE': '<span class="civ-icon" title="Science">🔬</span>',
+            'ICON_CULTURE': '<span class="civ-icon" title="Culture">🎭</span>',
+            'ICON_FAITH': '<span class="civ-icon" title="Faith">🕊️</span>',
+            'ICON_HOUSING': '<span class="civ-icon" title="Housing">🏠</span>',
+            'ICON_AMENITIES': '<span class="civ-icon" title="Amenities">😊</span>',
+            'ICON_POWER': '<span class="civ-icon" title="Power">⚡</span>',
+            'ICON_TOURISM': '<span class="civ-icon" title="Tourism">✈️</span>',
+            // Units/Military
+            'ICON_STRENGTH': '<span class="civ-icon" title="Combat Strength">⚔️</span>',
+            'ICON_RANGED_STRENGTH': '<span class="civ-icon" title="Ranged Strength">🏹</span>',
+            'ICON_BOMBARD_STRENGTH': '<span class="civ-icon" title="Bombard Strength">💣</span>',
+            'ICON_MOVEMENT': '<span class="civ-icon" title="Movement">👣</span>',
+            // Great People
+            'ICON_GREAT_PERSON': '<span class="civ-icon" title="Great Person">⭐</span>',
+            'ICON_GREAT_GENERAL': '<span class="civ-icon" title="Great General">🎖️</span>',
+            'ICON_GREAT_ADMIRAL': '<span class="civ-icon" title="Great Admiral">⚓</span>',
+            'ICON_GREAT_ENGINEER': '<span class="civ-icon" title="Great Engineer">🔧</span>',
+            'ICON_GREAT_MERCHANT': '<span class="civ-icon" title="Great Merchant">💰</span>',
+            'ICON_GREAT_PROPHET': '<span class="civ-icon" title="Great Prophet">📿</span>',
+            'ICON_GREAT_SCIENTIST': '<span class="civ-icon" title="Great Scientist">🔬</span>',
+            'ICON_GREAT_WRITER': '<span class="civ-icon" title="Great Writer">✍️</span>',
+            'ICON_GREAT_ARTIST': '<span class="civ-icon" title="Great Artist">🎨</span>',
+            'ICON_GREAT_MUSICIAN': '<span class="civ-icon" title="Great Musician">🎵</span>',
+            // Diplomacy
+            'ICON_ENVOY': '<span class="civ-icon" title="Envoy">🤝</span>',
+            'ICON_GOVERNOR': '<span class="civ-icon" title="Governor">👔</span>',
+            'ICON_DIPLOMATIC_FAVOR': '<span class="civ-icon" title="Diplomatic Favor">🏛️</span>',
+            // Other
+            'ICON_CITIZEN': '<span class="civ-icon" title="Citizen">👤</span>',
+            'ICON_TRADE_ROUTE': '<span class="civ-icon" title="Trade Route">🐪</span>',
+            'ICON_CAPITAL': '<span class="civ-icon" title="Capital">⭐</span>',
+            'ICON_DISTRICT': '<span class="civ-icon" title="District">🏗️</span>',
+            'ICON_WONDER': '<span class="civ-icon" title="Wonder">🏛️</span>',
+            'ICON_NOTIFICATION_DISCOVER_GOODY_HUT': '<span class="civ-icon" title="Tribal Village">🏕️</span>',
+        };
+
+        // Replace known icon tags
+        let result = text;
+        for (const [tag, replacement] of Object.entries(iconMap)) {
+            result = result.replace(new RegExp(`\\[${tag}\\]`, 'g'), replacement);
+        }
+
+        // For any remaining unknown icon tags, convert to readable text
+        result = result.replace(/\[ICON_([A-Z_]+)\]/g, (match, iconName) => {
+            const readable = iconName
+                .replace(/_/g, ' ')
+                .toLowerCase()
+                .split(' ')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+            return `<span class="civ-icon-text">[${readable}]</span>`;
+        });
+
+        return result;
+    }
 }
 
 // Initialize the viewer when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     new Civ6TimelineViewer();
+
+    // Back to top button functionality
+    const backToTopBtn = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 });
